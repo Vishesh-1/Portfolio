@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Data Engineer Portfolio
 
-## Getting Started
+A modern, minimalist portfolio website built for Data Engineers to showcase projects, certifications, and technical skills. Built with **Next.js**, **Tailwind CSS**, and a lightweight file-based CMS.
 
-First, run the development server:
+## 🚀 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+*   **Portfolio Showcase:** Clean grid layout to display data engineering projects with tags and links.
+*   **Certifications Section:** Dedicated area to display professional certifications with issuer details and optional images.
+*   **Admin Dashboard:** A private `/admin` route to easily add, edit, or delete projects and certifications without touching code.
+*   **File-Based Database:** Uses a local JSON file system (`data/projects.json`), making it zero-config and easy to back up.
+*   **Responsive Design:** Fully mobile-friendly UI built with Tailwind CSS.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+*   **Framework:** Next.js 15 (App Router)
+*   **Language:** TypeScript
+*   **Styling:** Tailwind CSS
+*   **Icons:** Lucide React
+*   **Deployment:** Vercel (Recommended)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🏃‍♂️ Getting Started
 
-## Learn More
+1.  **Clone the repository**
+    ```bash
+    git clone https://github.com/your-username/portfolio.git
+    cd portfolio
+    ```
 
-To learn more about Next.js, take a look at the following resources:
+2.  **Install dependencies**
+    ```bash
+    npm install
+    ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3.  **Run the development server**
+    ```bash
+    npm run dev
+    ```
+    Open [http://localhost:3000](http://localhost:3000) to see the site.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🔐 Admin Dashboard
 
-## Deploy on Vercel
+The project includes a hidden admin dashboard at `http://localhost:3000/admin`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1.  **Access:** Navigate to `/admin` in your browser.
+2.  **Login:** The default password check is simple.
+    *   Create a `.env.local` file in the root directory.
+    *   Add your password: `ADMIN_PASSWORD=your_secure_password`
+    *   If no environment variable is set, the default password is `admin`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📦 Deployment
+
+This project is optimized for deployment on **Vercel**.
+
+1.  Push your code to a GitHub repository.
+2.  Import the project into Vercel.
+3.  Add the `ADMIN_PASSWORD` environment variable in Vercel's settings.
+4.  Deploy!
+
+**Note on Vercel/Serverless:**
+Since Vercel is a serverless platform, changes made via the Admin Dashboard (writing to JSON files) **will not persist** permanently in production. The Admin Dashboard is best used locally (`localhost`) to manage content. Once you've added your data locally, commit and push the changes to GitHub to update your live site.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

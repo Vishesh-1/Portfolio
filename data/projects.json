@@ -1,0 +1,34 @@
+[
+  {
+    "id": "1",
+    "title": "Real-time ETL Pipeline",
+    "description": "Ingesting streaming data from IoT sensors using Kafka and Spark.",
+    "tags": [
+      "Kafka",
+      "Spark",
+      "AWS"
+    ],
+    "link": "https://github.com/example/etl-pipeline"
+  },
+  {
+    "id": "2",
+    "title": "Data Warehouse Migration",
+    "description": "Migrating legacy SQL Server data to Snowflake with minimal downtime.",
+    "tags": [
+      "Snowflake",
+      "SQL",
+      "Python"
+    ],
+    "link": "https://github.com/example/migration"
+  },
+  {
+    "title": "SQL server to Azure migration",
+    "description": "abc",
+    "tags": [
+      "SQL",
+      "Python"
+    ],
+    "link": "",
+    "id": "1764609905979"
+  }
+]
