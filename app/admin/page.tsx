@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect, useCallback } from 'react';
-import { Project, Certification } from '@/lib/api';
-import { Trash2, Plus, Award } from 'lucide-react';
+import { Project, Certification, Experience } from '@/lib/api';
+import { Trash2, Plus, Award, Briefcase } from 'lucide-react';
 
 export default function AdminDashboard() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -15,6 +15,13 @@ export default function AdminDashboard() {
   const [description, setDescription] = useState('');
   const [tags, setTags] = useState('');
   const [link, setLink] = useState('');
+
+  // Experience State
+  const [experiences, setExperiences] = useState<Experience[]>([]);
+  const [expRole, setExpRole] = useState('');
+  const [expCompany, setExpCompany] = useState('');
+  const [expDate, setExpDate] = useState('');
+  const [expDescription, setExpDescription] = useState('');
 
   // Certifications State
   const [certifications, setCertifications] = useState<Certification[]>([]);
@@ -32,6 +39,14 @@ export default function AdminDashboard() {
     }
   }, []);
 
+  const fetchExperiences = useCallback(async () => {
+    const res = await fetch('/api/experience');
+    if (res.ok) {
+      const data = await res.json();
+      setExperiences(data);
+    }
+  }, []);
+
   const fetchCertifications = useCallback(async () => {
     const res = await fetch('/api/certifications');
     if (res.ok) {
@@ -42,11 +57,11 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     const loadData = async () => {
-      await Promise.all([fetchProjects(), fetchCertifications()]);
+      await Promise.all([fetchProjects(), fetchExperiences(), fetchCertifications()]);
       setIsLoading(false);
     };
     loadData();
-  }, [fetchProjects, fetchCertifications]);
+  }, [fetchProjects, fetchExperiences, fetchCertifications]);
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
@@ -83,6 +98,30 @@ export default function AdminDashboard() {
       setLink('');
     } else {
       alert('Failed to add project');
+    }
+  }
+
+  async function handleAddExperience(e: React.FormEvent) {
+    e.preventDefault();
+    
+    const res = await fetch('/api/experience', {
+      method: 'POST',
+      body: JSON.stringify({
+        role: expRole,
+        company: expCompany,
+        date: expDate,
+        description: expDescription
+      }),
+    });
+
+    if (res.ok) {
+      fetchExperiences();
+      setExpRole('');
+      setExpCompany('');
+      setExpDate('');
+      setExpDescription('');
+    } else {
+      alert('Failed to add experience');
     }
   }
 
@@ -123,6 +162,20 @@ export default function AdminDashboard() {
       fetchProjects();
     } else {
       alert('Failed to delete project');
+    }
+  }
+
+  async function handleDeleteExperience(id: string) {
+    if (!confirm('Are you sure?')) return;
+    
+    const res = await fetch(`/api/experience/${id}`, {
+      method: 'DELETE',
+    });
+
+    if (res.ok) {
+      fetchExperiences();
+    } else {
+      alert('Failed to delete experience');
     }
   }
 
@@ -262,6 +315,94 @@ export default function AdminDashboard() {
               ))}
               {projects.length === 0 && (
                 <p className="text-slate-500 italic">No projects yet.</p>
+              )}
+            </div>
+          </div>
+        </section>
+
+        {/* Experience Section */}
+        <section>
+          <h2 className="text-2xl font-bold text-slate-800 mb-6 border-b pb-2">Experience Management</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Add Experience Form */}
+            <div className="bg-white p-6 rounded-lg shadow-sm h-fit">
+              <h3 className="text-xl font-semibold mb-4 flex items-center gap-2 text-slate-900">
+                <Briefcase size={20} />
+                Add New Experience
+              </h3>
+              <form onSubmit={handleAddExperience} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">Role</label>
+                  <input
+                    value={expRole}
+                    onChange={(e) => setExpRole(e.target.value)}
+                    required
+                    placeholder="Senior Data Engineer"
+                    className="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-indigo-600 text-slate-900"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">Company</label>
+                  <input
+                    value={expCompany}
+                    onChange={(e) => setExpCompany(e.target.value)}
+                    required
+                    placeholder="Tech Corp Inc."
+                    className="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-indigo-600 text-slate-900"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">Date Range</label>
+                  <input
+                    value={expDate}
+                    onChange={(e) => setExpDate(e.target.value)}
+                    required
+                    placeholder="Jan 2023 - Present"
+                    className="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-indigo-600 text-slate-900"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">Description</label>
+                  <textarea
+                    value={expDescription}
+                    onChange={(e) => setExpDescription(e.target.value)}
+                    required
+                    rows={4}
+                    placeholder="• Built ETL pipelines..."
+                    className="w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:border-indigo-600 text-slate-900"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="w-full bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700 transition-colors"
+                >
+                  Add Experience
+                </button>
+              </form>
+            </div>
+
+            {/* Experience List */}
+            <div className="space-y-4">
+              <h3 className="text-xl font-semibold text-slate-900">Current Experience</h3>
+              {experiences.map((exp) => (
+                <div key={exp.id} className="bg-white p-4 rounded-lg shadow-sm border border-slate-100 flex justify-between items-start">
+                  <div>
+                    <h4 className="font-medium text-slate-900">{exp.role}</h4>
+                    <p className="text-sm text-slate-700 font-medium">{exp.company}</p>
+                    <p className="text-xs text-slate-400 mt-1 mb-2">{exp.date}</p>
+                    <p className="text-sm text-slate-500 whitespace-pre-line line-clamp-3">{exp.description}</p>
+                  </div>
+                  <button
+                    onClick={() => handleDeleteExperience(exp.id)}
+                    className="text-red-500 hover:text-red-700 p-2"
+                    title="Delete Experience"
+                  >
+                    <Trash2 size={18} />
+                  </button>
+                </div>
+              ))}
+              {experiences.length === 0 && (
+                <p className="text-slate-500 italic">No experience yet.</p>
               )}
             </div>
           </div>
