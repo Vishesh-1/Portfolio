@@ -13,17 +13,8 @@ export default async function Home() {
     <main className="min-h-screen bg-white">
       <Hero />
       
-      <section className="max-w-5xl mx-auto px-4 py-16">
-        <h2 className="text-2xl font-bold text-slate-900 mb-8">Featured Projects</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {projects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
-        </div>
-      </section>
-
       {experiences.length > 0 && (
-        <section className="max-w-5xl mx-auto px-4 py-16 bg-slate-50">
+        <section className="max-w-5xl mx-auto px-4 py-16">
           <h2 className="text-2xl font-bold text-slate-900 mb-8">Work Experience</h2>
           <div className="space-y-6">
             {experiences.map((exp) => (
@@ -32,6 +23,15 @@ export default async function Home() {
           </div>
         </section>
       )}
+
+      <section className="max-w-5xl mx-auto px-4 py-16">
+        <h2 className="text-2xl font-bold text-slate-900 mb-8">Featured Projects</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {projects.map((project) => (
+            <ProjectCard key={project.id} project={project} />
+          ))}
+        </div>
+      </section>
 
       {certifications.length > 0 && (
         <section className="max-w-5xl mx-auto px-4 py-16">
