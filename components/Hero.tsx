@@ -1,4 +1,4 @@
-import { Github, Linkedin } from 'lucide-react';
+import { Github, Linkedin, FileText } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -16,7 +16,7 @@ export default function Hero() {
           <p className="text-lg md:text-xl text-slate-600 mb-8 max-w-2xl mx-auto md:mx-0 leading-relaxed">
             Building robust ETL pipelines, scalable data architectures, and turning raw data into actionable insights.
           </p>
-          <div className="flex justify-center md:justify-start gap-4">
+          <div className="flex flex-wrap justify-center md:justify-start gap-4">
             <Link
               href="https://github.com/Vishesh-1"
               target="_blank"
@@ -32,6 +32,14 @@ export default function Hero() {
             >
               <Linkedin size={20} />
               LinkedIn
+            </Link>
+            <Link
+              href="/resume.pdf"
+              target="_blank"
+              className="flex items-center gap-2 px-8 py-3.5 bg-white text-slate-700 border border-slate-200 rounded-full hover:bg-slate-50 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 font-medium"
+            >
+              <FileText size={20} />
+              Resume
             </Link>
           </div>
         </div>
