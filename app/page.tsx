@@ -9,9 +9,34 @@ export default async function Home() {
   const certifications = await getCertifications();
   const experiences = await getExperiences();
 
+  const skills = [
+    { category: "Languages", items: ["Python", "SQL", "Scala", "Java"] },
+    { category: "Data Engineering", items: ["Apache Spark", "Kafka", "Airflow", "DBT", "Hadoop"] },
+    { category: "Cloud & DevOps", items: ["AWS", "Docker", "Kubernetes", "Terraform", "Git"] },
+    { category: "Databases", items: ["PostgreSQL", "MongoDB", "Snowflake", "BigQuery"] },
+  ];
+
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen">
       <Hero />
+
+      <section className="max-w-5xl mx-auto px-4 py-12">
+        <h2 className="text-2xl font-bold text-slate-900 mb-8">Technical Skills</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {skills.map((skillGroup) => (
+            <div key={skillGroup.category} className="glass-card rounded-xl p-6 hover:-translate-y-1 transition-transform duration-300">
+              <h3 className="text-lg font-semibold text-slate-900 mb-4">{skillGroup.category}</h3>
+              <div className="flex flex-wrap gap-2">
+                {skillGroup.items.map((item) => (
+                  <span key={item} className="px-3 py-1 bg-white/50 border border-indigo-100 text-indigo-700 text-sm rounded-full font-medium">
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
       
       {experiences.length > 0 && (
         <section className="max-w-5xl mx-auto px-4 py-16">
