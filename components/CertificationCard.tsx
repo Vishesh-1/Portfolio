@@ -9,9 +9,9 @@ interface CertificationCardProps {
 
 export default function CertificationCard({ certification }: CertificationCardProps) {
   return (
-    <div className="group bg-white/70 backdrop-blur-sm border border-white/50 rounded-2xl p-6 shadow-[0_2px_10px_-3px_rgba(0,0,0,0.05)] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col overflow-hidden">
+    <div className="group bg-white/70 backdrop-blur-sm border border-white/50 rounded-2xl shadow-[0_2px_10px_-3px_rgba(0,0,0,0.05)] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col overflow-hidden">
       {certification.image && (
-        <div className="relative h-48 w-full -mx-6 -mt-6 mb-6 bg-slate-100 overflow-hidden">
+        <div className="relative h-48 w-full bg-slate-100 overflow-hidden">
           <Image
             src={certification.image}
             alt={certification.title}
@@ -20,7 +20,7 @@ export default function CertificationCard({ certification }: CertificationCardPr
           />
         </div>
       )}
-      <div className={`flex flex-col h-full ${!certification.image ? "pt-2" : ""}`}>
+      <div className="flex flex-col flex-grow p-6">
         <div className="flex justify-between items-start mb-3">
           <h3 className="text-lg font-bold text-slate-900 leading-tight group-hover:text-indigo-600 transition-colors pr-4">
             {certification.title}
