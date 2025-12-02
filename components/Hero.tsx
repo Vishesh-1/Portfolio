@@ -10,9 +10,6 @@ export default function Hero() {
 
       <div className="max-w-6xl mx-auto flex flex-col-reverse md:flex-row items-center gap-12">
         <div className="flex-1 text-center md:text-left z-10">
-          <div className="inline-block px-3 py-1 mb-4 text-sm font-medium text-indigo-600 bg-indigo-50 rounded-full border border-indigo-100">
-            Available for hire
-          </div>
           <h1 className="text-5xl md:text-7xl font-bold text-slate-900 mb-6 tracking-tight">
             Data <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-violet-600">Engineer</span>
           </h1>
