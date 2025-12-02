@@ -10,10 +10,22 @@ export default async function Home() {
   const experiences = await getExperiences();
 
   const skills = [
-    { category: "Languages", items: ["Python", "SQL", "Scala", "Java"] },
-    { category: "Data Engineering", items: ["Apache Spark", "Kafka", "Airflow", "DBT", "Hadoop"] },
-    { category: "Cloud & DevOps", items: ["AWS", "Docker", "Kubernetes", "Terraform", "Git"] },
-    { category: "Databases", items: ["PostgreSQL", "MongoDB", "Snowflake", "BigQuery"] },
+    {
+      category: "Cloud & Infrastructure",
+      items: ["Azure Data Factory", "Azure Synapse", "Azure Blob Storage", "Azure Logic Apps", "Microsoft Fabric", "Databricks"]
+    },
+    {
+      category: "Languages & Compute",
+      items: ["Python", "SQL", "T-SQL", "PySpark"]
+    },
+    {
+      category: "Architecture & Concepts",
+      items: ["ETL/ELT Design", "Data Warehousing", "Dimensional Modeling"]
+    },
+    {
+      category: "Tools & DevOps",
+      items: ["SQL Server", "Git", "Azure Dev-Ops"]
+    },
   ];
 
   return (
@@ -24,11 +36,13 @@ export default async function Home() {
         <h2 className="text-2xl font-bold text-slate-900 mb-8">Technical Skills</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {skills.map((skillGroup) => (
-            <div key={skillGroup.category} className="glass-card rounded-xl p-6 hover:-translate-y-1 transition-transform duration-300">
-              <h3 className="text-lg font-semibold text-slate-900 mb-4">{skillGroup.category}</h3>
-              <div className="flex flex-wrap gap-2">
+            <div key={skillGroup.category} className="glass-card rounded-2xl p-8 hover:-translate-y-1 transition-transform duration-300 border border-white/60">
+              <h3 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-2 border-b border-indigo-100 pb-2">
+                {skillGroup.category}
+              </h3>
+              <div className="flex flex-wrap gap-3">
                 {skillGroup.items.map((item) => (
-                  <span key={item} className="px-3 py-1 bg-white/50 border border-indigo-100 text-indigo-700 text-sm rounded-full font-medium">
+                  <span key={item} className="px-4 py-2 bg-white/70 border border-indigo-100 text-slate-700 text-sm rounded-lg font-medium shadow-sm hover:border-indigo-300 hover:text-indigo-700 transition-colors">
                     {item}
                   </span>
                 ))}
@@ -48,7 +62,7 @@ export default async function Home() {
           </div>
         </section>
       )}
-      
+
       {experiences.length > 0 && (
         <section className="max-w-5xl mx-auto px-4 py-16">
           <h2 className="text-2xl font-bold text-slate-900 mb-8">Work Experience</h2>
