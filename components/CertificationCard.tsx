@@ -9,7 +9,7 @@ interface CertificationCardProps {
 
 export default function CertificationCard({ certification }: CertificationCardProps) {
   return (
-    <div className="group bg-white/70 backdrop-blur-sm border border-white/50 rounded-2xl shadow-[0_2px_10px_-3px_rgba(0,0,0,0.05)] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col overflow-hidden">
+    <div className="group bg-white/70 backdrop-blur-sm border border-white/50 rounded-2xl p-6 shadow-[0_2px_10px_-3px_rgba(0,0,0,0.05)] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col overflow-hidden">
       {certification.image && (
         <div className="relative h-48 w-full -mx-6 -mt-6 mb-6 bg-slate-100 overflow-hidden">
           <Image
@@ -20,9 +20,9 @@ export default function CertificationCard({ certification }: CertificationCardPr
           />
         </div>
       )}
-      <div className={!certification.image ? "pt-2" : ""}>
+      <div className={`flex flex-col h-full ${!certification.image ? "pt-2" : ""}`}>
         <div className="flex justify-between items-start mb-3">
-          <h3 className="text-lg font-bold text-slate-900 leading-tight group-hover:text-indigo-600 transition-colors">
+          <h3 className="text-lg font-bold text-slate-900 leading-tight group-hover:text-indigo-600 transition-colors pr-4">
             {certification.title}
           </h3>
           {certification.link && (
@@ -37,14 +37,14 @@ export default function CertificationCard({ certification }: CertificationCardPr
         </div>
         
         <div className="flex items-center gap-2 text-slate-700 mb-4">
-          <div className="p-1.5 bg-indigo-50 text-indigo-600 rounded-md">
+          <div className="p-1.5 bg-indigo-50 text-indigo-600 rounded-md flex-shrink-0">
             <Award size={16} />
           </div>
           <span className="font-medium text-sm">{certification.issuer}</span>
         </div>
         
         <div className="flex items-center gap-2 text-slate-400 text-xs mt-auto border-t border-slate-100 pt-3">
-          <Calendar size={14} />
+          <Calendar size={14} className="flex-shrink-0" />
           <span>{certification.date}</span>
         </div>
       </div>
